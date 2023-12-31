@@ -53,7 +53,7 @@ const spec={
           }
         }
       },
-      "patch": {
+      "put": {
         "tags": [
           "users"
         ],
@@ -75,20 +75,7 @@ const spec={
         },
         "responses": {
           "200": {
-            "description": "ユーザーのモデル",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "discordID": "100000000000000000",
-                  "atcoderID": "atcoderUser1",
-                  "rating": 0,
-                  "solved": []
-                }
-              }
-            }
+            "description": "void"
           }
         }
       }
