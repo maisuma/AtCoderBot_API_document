@@ -134,7 +134,7 @@ const spec={
           }
         }
       },
-      "patch": {
+      "delete": {
         "tags": [
           "users"
         ],
