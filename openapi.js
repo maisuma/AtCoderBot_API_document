@@ -53,14 +53,14 @@ const spec={
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "users"
         ],
-        "summary": "ユーザーを追加",
-        "description": "ユーザーを追加する",
+        "summary": "ユーザーを作成",
+        "description": "ユーザーを作成する",
         "requestBody": {
-          "description": "追加するユーザー",
+          "description": "作成するユーザー",
           "content": {
             "application/json": {
               "schema": {
@@ -100,6 +100,46 @@ const spec={
         ],
         "summary": "ユーザーを取得",
         "description": "Discord ID からユーザーを取得する",
+        "parameters": [
+          {
+            "name": "discordID",
+            "in": "path",
+            "description": "Discord ID",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 100000000000000000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ユーザーのモデル",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "discordID": 100000000000000000,
+                  "atcoderID": "atcoderUser1",
+                  "rating": 123,
+                  "solved": [
+                    "abc001_a",
+                    "abc003_b"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "ユーザーを削除",
+        "description": "Discord ID からユーザーを削除する",
         "parameters": [
           {
             "name": "discordID",
