@@ -22,6 +22,12 @@ const spec={
             "description": "ユーザーのモデルの配列",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                },
                 "example": [
                   {
                     "discordID": 100000000000000000,
@@ -158,7 +164,8 @@ const spec={
                 },
                 "example": {
                   "serverID": 100000000000000000,
-                  "members": []
+                  "members": [],
+                  "dailyID": "undefined"
                 }
               }
             }
@@ -207,7 +214,8 @@ const spec={
                   "serverID": 100000000000000000,
                   "members": [
                     "atcoderUser1"
-                  ]
+                  ],
+                  "dailyID": 100000000000000000
                 }
               }
             }
@@ -246,7 +254,8 @@ const spec={
                   "serverID": 100000000000000000,
                   "members": [
                     "atcoderUser1"
-                  ]
+                  ],
+                  "dailyID": 100000000000000000
                 }
               }
             }
@@ -271,36 +280,68 @@ const spec={
                 },
                 "example": {
                   "Gray": {
-                    "contestID": "abc001",
-                    "problemID": "abc001_a"
+                    "problemID": "abc333_b",
+                    "problemIndex": "B",
+                    "contestID": "abc333",
+                    "name": "Pentagon",
+                    "point": 200,
+                    "difficulty": 89
                   },
                   "Brown": {
-                    "contestID": "abc001",
-                    "problemID": "abc001_a"
+                    "problemID": "abc333_b",
+                    "problemIndex": "B",
+                    "contestID": "abc333",
+                    "name": "Pentagon",
+                    "point": 200,
+                    "difficulty": 89
                   },
                   "Green": {
-                    "contestID": "abc001",
-                    "problemID": "abc001_a"
+                    "problemID": "abc333_b",
+                    "problemIndex": "B",
+                    "contestID": "abc333",
+                    "name": "Pentagon",
+                    "point": 200,
+                    "difficulty": 89
                   },
                   "Cyan": {
-                    "contestID": "abc001",
-                    "problemID": "abc001_a"
+                    "problemID": "abc333_b",
+                    "problemIndex": "B",
+                    "contestID": "abc333",
+                    "name": "Pentagon",
+                    "point": 200,
+                    "difficulty": 89
                   },
                   "Blue": {
-                    "contestID": "abc001",
-                    "problemID": "abc001_a"
+                    "problemID": "abc333_b",
+                    "problemIndex": "B",
+                    "contestID": "abc333",
+                    "name": "Pentagon",
+                    "point": 200,
+                    "difficulty": 89
                   },
                   "Yellow": {
-                    "contestID": "abc001",
-                    "problemID": "abc001_a"
+                    "problemID": "abc333_b",
+                    "problemIndex": "B",
+                    "contestID": "abc333",
+                    "name": "Pentagon",
+                    "point": 200,
+                    "difficulty": 89
                   },
                   "Orange": {
-                    "contestID": "abc001",
-                    "problemID": "abc001_a"
+                    "problemID": "abc333_b",
+                    "problemIndex": "B",
+                    "contestID": "abc333",
+                    "name": "Pentagon",
+                    "point": 200,
+                    "difficulty": 89
                   },
                   "Red": {
-                    "contestID": "abc001",
-                    "problemID": "abc001_a"
+                    "problemID": "abc333_b",
+                    "problemIndex": "B",
+                    "contestID": "abc333",
+                    "name": "Pentagon",
+                    "point": 200,
+                    "difficulty": 89
                   }
                 }
               }
@@ -353,6 +394,25 @@ const spec={
             "description": "精進記録",
             "content": {
               "application/json": {
+                "schema": {
+                  "properties": {
+                    "serverID": {
+                      "type": "number"
+                    },
+                    "from": {
+                      "type": "number"
+                    },
+                    "to": {
+                      "type": "number"
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Result"
+                      }
+                    }
+                  }
+                },
                 "example": {
                   "serverID": 100000000000000000,
                   "from": 1703332800,
@@ -360,19 +420,37 @@ const spec={
                   "results": [
                     {
                       "atcoderID": "atcoderUser1",
-                      "solved": {
-                        "Gray": 3,
-                        "Blue": 2,
-                        "Red": 4
-                      }
+                      "solved": [
+                        {
+                          "color": "Gray",
+                          "count": 3
+                        },
+                        {
+                          "color": "Blue",
+                          "count": 2
+                        },
+                        {
+                          "color": "Red",
+                          "count": 4
+                        }
+                      ]
                     },
                     {
                       "atcoderID": "atcoderUser2",
-                      "solved": {
-                        "Brown": 2,
-                        "Green": 2,
-                        "Yellow": 4
-                      }
+                      "solved": [
+                        {
+                          "color": "Brown",
+                          "count": 4
+                        },
+                        {
+                          "color": "Green",
+                          "count": 2
+                        },
+                        {
+                          "color": "Yellow",
+                          "count": 4
+                        }
+                      ]
                     }
                   ]
                 }
@@ -427,18 +505,37 @@ const spec={
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Result"
+                  "properties": {
+                    "from": {
+                      "type": "number"
+                    },
+                    "to": {
+                      "type": "number"
+                    },
+                    "result": {
+                      "$ref": "#/components/schemas/Result"
+                    }
+                  }
                 },
                 "example": {
                   "from": 1703332800,
                   "to": 1703927083,
                   "result": {
                     "atcoderID": "atcoderUser1",
-                    "solved": {
-                      "Gray": 3,
-                      "Blue": 2,
-                      "Red": 4
-                    }
+                    "solved": [
+                      {
+                        "color": "Gray",
+                        "count": 3
+                      },
+                      {
+                        "color": "Blue",
+                        "count": 2
+                      },
+                      {
+                        "color": "Red",
+                        "count": 4
+                      }
+                    ]
                   }
                 }
               }
@@ -462,7 +559,7 @@ const spec={
             "required": true,
             "schema": {
               "type": "string",
-              "example": "abc001"
+              "example": "abc333"
             }
           },
           {
@@ -485,14 +582,129 @@ const spec={
                   "$ref": "#/components/schemas/ContestResult"
                 },
                 "example": {
-                  "contestID": "abc001",
+                  "contestID": "abc333",
                   "atcoderID": "atcoderUser1",
                   "solved": [
-                    "A",
-                    "B",
-                    "D"
+                    {
+                      "problemID": "abc333_b",
+                      "problemIndex": "B",
+                      "contestID": "abc333",
+                      "name": "Pentagon",
+                      "point": 200,
+                      "difficulty": 89
+                    },
+                    {
+                      "problemID": "abc333_c",
+                      "problemIndex": "C",
+                      "contestID": "abc333",
+                      "name": "Repunit Trio",
+                      "point": 300,
+                      "difficulty": 258
+                    }
                   ]
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contests": {
+      "get": {
+        "tags": [
+          "contests"
+        ],
+        "summary": "コンテスト一覧を取得",
+        "description": "コンテスト一覧を取得",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "始め",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 1702728000
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "終わり",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 1703332800
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "コンテストの配列 \n※開催前のコンテストのproblemsは表示されません。\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contest"
+                  }
+                },
+                "example": [
+                  {
+                    "contestID": "abc333",
+                    "startAt": 1702728000,
+                    "durationSecond": 6000,
+                    "problems": [
+                      {
+                        "problemIndex": "A",
+                        "problemID": "abc333_a",
+                        "name": "Three Threes ",
+                        "point": 100
+                      },
+                      {
+                        "problemIndex": "B",
+                        "problemID": "abc333_b",
+                        "name": "Pentagon",
+                        "point": 200
+                      },
+                      {
+                        "problemIndex": "C",
+                        "problemID": "abc333_c",
+                        "name": "Repunit Trio",
+                        "point": 300
+                      },
+                      {
+                        "problemIndex": "D",
+                        "problemID": "abc333_d",
+                        "name": "Erase Leaves",
+                        "point": 400
+                      },
+                      {
+                        "problemIndex": "E",
+                        "problemID": "abc333_e",
+                        "name": "Takahashi Quest",
+                        "point": 450
+                      },
+                      {
+                        "problemIndex": "F",
+                        "problemID": "abc333_f",
+                        "name": "Bomb Game 2",
+                        "point": 550
+                      },
+                      {
+                        "problemIndex": "G",
+                        "problemID": "abc333_g",
+                        "name": "Nearest Fraction",
+                        "point": 625
+                      }
+                    ]
+                  },
+                  {
+                    "contestID": "abc334",
+                    "startAt": 1703332800,
+                    "durationSecond": 6000
+                  }
+                ]
               }
             }
           }
@@ -537,34 +749,16 @@ const spec={
             "type": "string"
           },
           "solved": {
-            "type": "object",
-            "properties": {
-              "None": {
-                "type": "number"
-              },
-              "Gray": {
-                "type": "number"
-              },
-              "Brown": {
-                "type": "number"
-              },
-              "Green": {
-                "type": "number"
-              },
-              "Cyan": {
-                "type": "number"
-              },
-              "Blue": {
-                "type": "number"
-              },
-              "Yellow": {
-                "type": "number"
-              },
-              "Orange": {
-                "type": "number"
-              },
-              "Red": {
-                "type": "number"
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "color": {
+                  "type": "string"
+                },
+                "count": {
+                  "type": "number"
+                }
               }
             }
           }
@@ -587,7 +781,32 @@ const spec={
           "solved": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Contest": {
+        "type": "object",
+        "required": [
+          "contestID",
+          "startAt",
+          "durationSecond"
+        ],
+        "properties": {
+          "contestID": {
+            "type": "string"
+          },
+          "startAt": {
+            "type": "number"
+          },
+          "durationSecond": {
+            "type": "number"
+          },
+          "problems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Problem"
             }
           }
         }
@@ -607,6 +826,32 @@ const spec={
             "items": {
               "type": "string"
             }
+          },
+          "dailyID": {
+            "type": "number"
+          }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "properties": {
+          "problemID": {
+            "type": "string"
+          },
+          "problemIndex": {
+            "type": "string"
+          },
+          "contestID": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "point": {
+            "type": "number"
+          },
+          "difficulty": {
+            "type": "number"
           }
         }
       },
@@ -614,92 +859,28 @@ const spec={
         "type": "object",
         "properties": {
           "Gray": {
-            "type": "object",
-            "properties": {
-              "contestID": {
-                "type": "string"
-              },
-              "problemID": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Problem"
           },
           "Brown": {
-            "type": "object",
-            "properties": {
-              "contestID": {
-                "type": "string"
-              },
-              "problemID": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Problem"
           },
           "Green": {
-            "type": "object",
-            "properties": {
-              "contestID": {
-                "type": "string"
-              },
-              "problemID": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Problem"
           },
           "Cyan": {
-            "type": "object",
-            "properties": {
-              "contestID": {
-                "type": "string"
-              },
-              "problemID": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Problem"
           },
           "Blue": {
-            "type": "object",
-            "properties": {
-              "contestID": {
-                "type": "string"
-              },
-              "problemID": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Problem"
           },
           "Yellow": {
-            "type": "object",
-            "properties": {
-              "contestID": {
-                "type": "string"
-              },
-              "problemID": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Problem"
           },
           "Orange": {
-            "type": "object",
-            "properties": {
-              "contestID": {
-                "type": "string"
-              },
-              "problemID": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Problem"
           },
           "Red": {
-            "type": "object",
-            "properties": {
-              "contestID": {
-                "type": "string"
-              },
-              "problemID": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Problem"
           }
         }
       }
