@@ -6,7 +6,7 @@ const spec={
   },
   "servers": [
     {
-      "url": "localhost:8000"
+      "url": "localhost:8000/api"
     }
   ],
   "paths": {
@@ -30,7 +30,7 @@ const spec={
                 },
                 "example": [
                   {
-                    "discordID": 100000000000000000,
+                    "discordID": "100000000000000000",
                     "atcoderID": "atcoderUser1",
                     "rating": 123,
                     "solved": [
@@ -39,7 +39,7 @@ const spec={
                     ]
                   },
                   {
-                    "discordID": 200000000000000000,
+                    "discordID": "200000000000000000",
                     "atcoderID": "atcoderUser2",
                     "rating": 456,
                     "solved": [
@@ -53,21 +53,21 @@ const spec={
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "users"
         ],
-        "summary": "ユーザーを作成",
-        "description": "ユーザーを作成する",
+        "summary": "ユーザーの紐づけ",
+        "description": "AtCoder ID と Discord ID を紐づける",
         "requestBody": {
-          "description": "作成するユーザー",
+          "description": "ユーザー",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/User"
               },
               "example": {
-                "discordID": 100000000000000000,
+                "discordID": "100000000000000000",
                 "atcoderID": "atcoderUser1"
               }
             }
@@ -82,9 +82,9 @@ const spec={
                   "$ref": "#/components/schemas/User"
                 },
                 "example": {
-                  "discordID": 100000000000000000,
+                  "discordID": "100000000000000000",
                   "atcoderID": "atcoderUser1",
-                  "rating": "undefined",
+                  "rating": 0,
                   "solved": []
                 }
               }
@@ -107,8 +107,8 @@ const spec={
             "description": "Discord ID",
             "required": true,
             "schema": {
-              "type": "number",
-              "example": 100000000000000000
+              "type": "string",
+              "example": "100000000000000000"
             }
           }
         ],
@@ -121,7 +121,7 @@ const spec={
                   "$ref": "#/components/schemas/User"
                 },
                 "example": {
-                  "discordID": 100000000000000000,
+                  "discordID": "100000000000000000",
                   "atcoderID": "atcoderUser1",
                   "rating": 123,
                   "solved": [
@@ -134,12 +134,12 @@ const spec={
           }
         }
       },
-      "delete": {
+      "patch": {
         "tags": [
           "users"
         ],
-        "summary": "ユーザーを削除",
-        "description": "Discord ID からユーザーを削除する",
+        "summary": "ユーザーの紐づけ解除",
+        "description": "AtCoder ID と Discord ID の紐づけを解除する",
         "parameters": [
           {
             "name": "discordID",
@@ -147,30 +147,14 @@ const spec={
             "description": "Discord ID",
             "required": true,
             "schema": {
-              "type": "number",
-              "example": 100000000000000000
+              "type": "string",
+              "example": "100000000000000000"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "ユーザーのモデル",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                },
-                "example": {
-                  "discordID": 100000000000000000,
-                  "atcoderID": "atcoderUser1",
-                  "rating": 123,
-                  "solved": [
-                    "abc001_a",
-                    "abc003_b"
-                  ]
-                }
-              }
-            }
+            "description": "void"
           }
         }
       }
@@ -189,8 +173,8 @@ const spec={
             "description": "サーバーID",
             "required": true,
             "schema": {
-              "type": "number",
-              "example": 100000000000000000
+              "type": "string",
+              "example": "100000000000000000"
             }
           }
         ],
@@ -203,9 +187,9 @@ const spec={
                   "$ref": "#/components/schemas/Server"
                 },
                 "example": {
-                  "serverID": 100000000000000000,
+                  "serverID": "100000000000000000",
                   "members": [],
-                  "dailyID": "undefined"
+                  "dailyID": "0"
                 }
               }
             }
@@ -227,8 +211,8 @@ const spec={
             "description": "サーバーID",
             "required": true,
             "schema": {
-              "type": "number",
-              "example": 100000000000000000
+              "type": "string",
+              "example": "100000000000000000"
             }
           },
           {
@@ -251,11 +235,11 @@ const spec={
                   "$ref": "#/components/schemas/Server"
                 },
                 "example": {
-                  "serverID": 100000000000000000,
+                  "serverID": "100000000000000000",
                   "members": [
                     "atcoderUser1"
                   ],
-                  "dailyID": 100000000000000000
+                  "dailyID": "100000000000000000"
                 }
               }
             }
@@ -277,8 +261,8 @@ const spec={
             "description": "サーバーID",
             "required": true,
             "schema": {
-              "type": "number",
-              "example": 100000000000000000
+              "type": "string",
+              "example": "100000000000000000"
             }
           }
         ],
@@ -291,7 +275,7 @@ const spec={
                   "$ref": "#/components/schemas/Server"
                 },
                 "example": {
-                  "serverID": 100000000000000000,
+                  "serverID": "100000000000000000",
                   "members": [
                     "atcoderUser1"
                   ],
@@ -404,8 +388,8 @@ const spec={
             "description": "サーバーID",
             "required": true,
             "schema": {
-              "type": "number",
-              "example": 100000000000000000
+              "type": "string",
+              "example": "100000000000000000"
             }
           },
           {
@@ -437,7 +421,7 @@ const spec={
                 "schema": {
                   "properties": {
                     "serverID": {
-                      "type": "number"
+                      "type": "string"
                     },
                     "from": {
                       "type": "number"
@@ -454,7 +438,7 @@ const spec={
                   }
                 },
                 "example": {
-                  "serverID": 100000000000000000,
+                  "serverID": "100000000000000000",
                   "from": 1703332800,
                   "to": 1703927083,
                   "results": [
@@ -514,8 +498,8 @@ const spec={
             "description": "AtCoder ID",
             "required": true,
             "schema": {
-              "type": "number",
-              "example": 100000000000000000
+              "type": "string",
+              "example": "atcoderUser1"
             }
           },
           {
@@ -762,7 +746,7 @@ const spec={
         ],
         "properties": {
           "discordID": {
-            "type": "number"
+            "type": "string"
           },
           "atcoderID": {
             "type": "string"
@@ -859,7 +843,7 @@ const spec={
         ],
         "properties": {
           "serverID": {
-            "type": "number"
+            "type": "string"
           },
           "members": {
             "type": "array",
@@ -868,7 +852,7 @@ const spec={
             }
           },
           "dailyID": {
-            "type": "number"
+            "type": "string"
           }
         }
       },
