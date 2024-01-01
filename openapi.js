@@ -190,7 +190,7 @@ const spec={
           "servers"
         ],
         "summary": "精進ユーザーを追加",
-        "description": "サーバーの精進ユーザー一覧に、AtCoder ID を追加",
+        "description": "サーバーの精進ユーザー一覧に、Discord ID を追加",
         "parameters": [
           {
             "name": "serverID",
@@ -203,13 +203,13 @@ const spec={
             }
           },
           {
-            "name": "atcoderID",
+            "name": "discordID",
             "in": "header",
-            "description": "AtCoder ID",
+            "description": "Discord ID",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "atcoderUser1"
+              "example": "100000000000000000"
             }
           }
         ],
@@ -224,7 +224,7 @@ const spec={
                 "example": {
                   "serverID": "100000000000000000",
                   "members": [
-                    "atcoderUser1"
+                    "100000000000000000"
                   ],
                   "dailyID": "100000000000000000"
                 }
@@ -264,7 +264,7 @@ const spec={
                 "example": {
                   "serverID": "100000000000000000",
                   "members": [
-                    "atcoderUser1"
+                    "100000000000000000"
                   ],
                   "dailyID": 100000000000000000
                 }
