@@ -561,7 +561,7 @@ const spec={
           "results"
         ],
         "summary": "ユーザーのコンテスト結果を取得",
-        "description": "ユーザーのコンテスト結果を取得",
+        "description": "ユーザーのリアルタイムのコンテスト結果を取得する",
         "parameters": [
           {
             "name": "contestID",
@@ -651,7 +651,7 @@ const spec={
         ],
         "responses": {
           "200": {
-            "description": "コンテストの配列 \n※開催前のコンテストのproblemsは表示されません。\n",
+            "description": "コンテストの配列 \n",
             "content": {
               "application/json": {
                 "schema": {
@@ -670,50 +670,87 @@ const spec={
                         "problemIndex": "A",
                         "problemID": "abc333_a",
                         "name": "Three Threes ",
-                        "point": 100
+                        "point": 100,
+                        "difficulty": 12345
                       },
                       {
                         "problemIndex": "B",
                         "problemID": "abc333_b",
                         "name": "Pentagon",
-                        "point": 200
+                        "point": 200,
+                        "difficulty": 12345
                       },
                       {
                         "problemIndex": "C",
                         "problemID": "abc333_c",
                         "name": "Repunit Trio",
-                        "point": 300
+                        "point": 300,
+                        "difficulty": 12345
                       },
                       {
                         "problemIndex": "D",
                         "problemID": "abc333_d",
                         "name": "Erase Leaves",
-                        "point": 400
+                        "point": 400,
+                        "difficulty": 12345
                       },
                       {
                         "problemIndex": "E",
                         "problemID": "abc333_e",
                         "name": "Takahashi Quest",
-                        "point": 450
+                        "point": 450,
+                        "difficulty": 12345
                       },
                       {
                         "problemIndex": "F",
                         "problemID": "abc333_f",
                         "name": "Bomb Game 2",
-                        "point": 550
+                        "point": 550,
+                        "difficulty": 12345
                       },
                       {
                         "problemIndex": "G",
                         "problemID": "abc333_g",
                         "name": "Nearest Fraction",
-                        "point": 625
+                        "point": 625,
+                        "difficulty": 12345
                       }
                     ]
                   },
                   {
                     "contestID": "abc334",
                     "startAt": 1703332800,
-                    "durationSecond": 6000
+                    "durationSecond": 6000,
+                    "problems": [
+                      {
+                        "problemID": "abc334_a",
+                        "point": 100
+                      },
+                      {
+                        "problemID": "abc334_b",
+                        "point": 250
+                      },
+                      {
+                        "problemID": "abc334_c",
+                        "point": 350
+                      },
+                      {
+                        "problemID": "abc334_d",
+                        "point": 400
+                      },
+                      {
+                        "problemID": "abc334_e",
+                        "point": 450
+                      },
+                      {
+                        "problemID": "abc334_f",
+                        "point": 550
+                      },
+                      {
+                        "problemID": "abc334_g",
+                        "point": 650
+                      }
+                    ]
                   }
                 ]
               }
@@ -845,6 +882,10 @@ const spec={
       },
       "Problem": {
         "type": "object",
+        "required": [
+          "problemID",
+          "name"
+        ],
         "properties": {
           "problemID": {
             "type": "string"
@@ -856,6 +897,9 @@ const spec={
             "type": "string"
           },
           "name": {
+            "type": "string"
+          },
+          "title": {
             "type": "string"
           },
           "point": {
