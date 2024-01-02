@@ -665,6 +665,7 @@ const spec={
                     "contestID": "abc333",
                     "startAt": 1702728000,
                     "durationSecond": 6000,
+                    "title": "トヨタ自動車プログラミングコンテスト2023#8（AtCoder Beginner Contest 333）",
                     "problems": [
                       {
                         "problemIndex": "A",
@@ -721,6 +722,7 @@ const spec={
                     "contestID": "abc334",
                     "startAt": 1703332800,
                     "durationSecond": 6000,
+                    "title": "ユニークビジョンプログラミングコンテスト2023 クリスマス (AtCoder Beginner Contest 334)",
                     "problems": [
                       {
                         "problemID": "abc334_a",
@@ -851,6 +853,9 @@ const spec={
           "durationSecond": {
             "type": "number"
           },
+          "title": {
+            "type": "string"
+          },
           "problems": {
             "type": "array",
             "items": {
@@ -883,8 +888,7 @@ const spec={
       "Problem": {
         "type": "object",
         "required": [
-          "problemID",
-          "name"
+          "problemID"
         ],
         "properties": {
           "problemID": {
