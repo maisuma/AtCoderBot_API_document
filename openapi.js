@@ -118,6 +118,9 @@ const spec={
                 }
               }
             }
+          },
+          "404": {
+            "description": "ユーザーが存在しない"
           }
         }
       },
@@ -153,18 +156,23 @@ const spec={
         ],
         "summary": "サーバーを初期化",
         "description": "サーバーIDからサーバーを初期化する。必ず初めに実行してください。",
-        "parameters": [
-          {
-            "name": "serverID",
-            "in": "header",
-            "description": "サーバーID",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "100000000000000000"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "serverID": "100000000000000000"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "serverID": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "サーバーのモデル",
@@ -184,7 +192,7 @@ const spec={
         }
       }
     },
-    "/servers/members": {
+    "/servers/members/{serverID}": {
       "post": {
         "tags": [
           "servers"
@@ -194,17 +202,7 @@ const spec={
         "parameters": [
           {
             "name": "serverID",
-            "in": "header",
-            "description": "サーバーID",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "100000000000000000"
-            }
-          },
-          {
-            "name": "discordID",
-            "in": "header",
+            "in": "path",
             "description": "Discord ID",
             "required": true,
             "schema": {
@@ -213,6 +211,23 @@ const spec={
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "discordID": "100000000000000000"
+              },
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "discordID": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "サーバーのモデル",
@@ -230,6 +245,40 @@ const spec={
                 }
               }
             }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "servers"
+        ],
+        "summary": "精進ユーザーを削除",
+        "description": "精進ユーザーを削除する。Discord ID の指定がない場合、全ユーザーを削除する。",
+        "parameters": [
+          {
+            "name": "serverID",
+            "in": "path",
+            "description": "Discord ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "100000000000000000"
+            }
+          },
+          {
+            "name": "discordID",
+            "in": "query",
+            "description": "Discord ID",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "100000000000000000"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "void"
           }
         }
       }
