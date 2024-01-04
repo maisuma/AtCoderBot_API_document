@@ -283,6 +283,49 @@ const spec={
         }
       }
     },
+    "/servers/daily/{serverID}": {
+      "patch": {
+        "tags": [
+          "servers"
+        ],
+        "summary": "今日の一問のメッセージIDを更新",
+        "description": "今日の一問のメッセージIDを更新",
+        "parameters": [
+          {
+            "name": "serverID",
+            "in": "path",
+            "description": "Discord ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "100000000000000000"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dailyID": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "dailyID": "100000000000000000"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "void"
+          }
+        }
+      }
+    },
     "/servers/{serverID}": {
       "get": {
         "tags": [
