@@ -653,7 +653,7 @@ const spec={
           "results"
         ],
         "summary": "ユーザーのコンテスト結果を取得",
-        "description": "ユーザーのリアルタイムのコンテスト結果を取得する",
+        "description": "ユーザーのコンテスト終了時の結果を取得する",
         "parameters": [
           {
             "name": "contestID",
@@ -852,6 +852,170 @@ const spec={
           }
         }
       }
+    },
+    "/virtual_contests": {
+      "get": {
+        "tags": [
+          "virtual_contests"
+        ],
+        "summary": "バーチャルコンテスト一覧を取得",
+        "description": "バーチャルコンテスト一覧を取得",
+        "responses": {
+          "200": {
+            "description": "バーチャルコンテストの配列",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VirtualContest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "virtual_contests"
+        ],
+        "summary": "バーチャルコンテストを作成",
+        "description": "バーチャルコンテストを作成",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "startAt": {
+                    "type": "number"
+                  },
+                  "durationSecond": {
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "visible": {
+                    "type": "string"
+                  },
+                  "serverID": {
+                    "type": "string"
+                  },
+                  "members": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "problems": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "startAt": 100,
+                "durationSecond": 6000,
+                "title": "Virtual Contest",
+                "visible": "discordOnly (All)",
+                "serverID": "100000000000000000",
+                "members": [
+                  "atcoderUser1",
+                  "atcoderUser2"
+                ],
+                "problems": [
+                  "Gray",
+                  "Gray",
+                  "Blue"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "バーチャルコンテスト",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VirtualContest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/virtual_contests/{virtualContestID}": {
+      "get": {
+        "tags": [
+          "virtual_contests"
+        ],
+        "summary": "バーチャルコンテストを取得",
+        "description": "バーチャルコンテストを取得",
+        "parameters": [
+          {
+            "name": "virtualContestID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "バーチャルコンテスト",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualContest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/virtual_contests/standings/{virtualContestID}": {
+      "get": {
+        "tags": [
+          "virtual_contests"
+        ],
+        "summary": "バーチャルコンテストの順位を取得",
+        "description": "バーチャルコンテストの順位を取得",
+        "parameters": [
+          {
+            "name": "virtualContestID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "順位表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Standing"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -952,6 +1116,84 @@ const spec={
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "VirtualContest": {
+        "type": "object",
+        "properties": {
+          "virtualContestID": {
+            "type": "number"
+          },
+          "startAt": {
+            "type": "number"
+          },
+          "durationSecond": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "string"
+          },
+          "serverID": {
+            "type": "string"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "problems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      },
+      "Standing": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "atcoderID": {
+              "type": "string"
+            },
+            "time": {
+              "type": "number"
+            },
+            "point": {
+              "type": "number"
+            },
+            "problems": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "problemIndex": {
+                    "type": "string"
+                  },
+                  "accepted": {
+                    "type": "boolean"
+                  },
+                  "penalty": {
+                    "type": "number"
+                  },
+                  "time": {
+                    "type": "number"
+                  },
+                  "timePenalty": {
+                    "type": "number"
+                  },
+                  "point": {
+                    "type": "number"
+                  }
+                }
+              }
             }
           }
         }
