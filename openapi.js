@@ -860,6 +860,38 @@ const spec={
         ],
         "summary": "バーチャルコンテスト一覧を取得",
         "description": "バーチャルコンテスト一覧を取得",
+        "parameters": [
+          {
+            "name": "serverID",
+            "in": "query",
+            "description": "サーバーID",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": "100000000000000000"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "始め",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 1702728000
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "終わり",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 1703332800
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "バーチャルコンテストの配列",
