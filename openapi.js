@@ -515,47 +515,6 @@ const spec={
                       }
                     }
                   }
-                },
-                "example": {
-                  "serverID": "100000000000000000",
-                  "from": 1703332800,
-                  "to": 1703927083,
-                  "results": [
-                    {
-                      "atcoderID": "atcoderUser1",
-                      "solved": [
-                        {
-                          "color": "Gray",
-                          "count": 3
-                        },
-                        {
-                          "color": "Blue",
-                          "count": 2
-                        },
-                        {
-                          "color": "Red",
-                          "count": 4
-                        }
-                      ]
-                    },
-                    {
-                      "atcoderID": "atcoderUser2",
-                      "solved": [
-                        {
-                          "color": "Brown",
-                          "count": 4
-                        },
-                        {
-                          "color": "Green",
-                          "count": 2
-                        },
-                        {
-                          "color": "Yellow",
-                          "count": 4
-                        }
-                      ]
-                    }
-                  ]
                 }
               }
             }
@@ -618,27 +577,6 @@ const spec={
                     "result": {
                       "$ref": "#/components/schemas/Result"
                     }
-                  }
-                },
-                "example": {
-                  "from": 1703332800,
-                  "to": 1703927083,
-                  "result": {
-                    "atcoderID": "atcoderUser1",
-                    "solved": [
-                      {
-                        "color": "Gray",
-                        "count": 3
-                      },
-                      {
-                        "color": "Blue",
-                        "count": 2
-                      },
-                      {
-                        "color": "Red",
-                        "count": 4
-                      }
-                    ]
                   }
                 }
               }
@@ -1041,7 +979,7 @@ const spec={
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Standing"
+                  "$ref": "#/components/schemas/Standings"
                 }
               }
             }
@@ -1089,15 +1027,7 @@ const spec={
           "solved": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "color": {
-                  "type": "string"
-                },
-                "count": {
-                  "type": "number"
-                }
-              }
+              "$ref": "#/components/schemas/Problem"
             }
           }
         }
@@ -1187,43 +1117,46 @@ const spec={
           }
         }
       },
-      "Standing": {
+      "Standings": {
         "type": "array",
         "items": {
-          "type": "object",
-          "properties": {
-            "atcoderID": {
-              "type": "string"
-            },
-            "time": {
-              "type": "number"
-            },
-            "point": {
-              "type": "number"
-            },
-            "problems": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "problemIndex": {
-                    "type": "string"
-                  },
-                  "accepted": {
-                    "type": "boolean"
-                  },
-                  "penalty": {
-                    "type": "number"
-                  },
-                  "time": {
-                    "type": "number"
-                  },
-                  "timePenalty": {
-                    "type": "number"
-                  },
-                  "point": {
-                    "type": "number"
-                  }
+          "$ref": "#/components/schemas/Standing"
+        }
+      },
+      "Standing": {
+        "type": "object",
+        "properties": {
+          "atcoderID": {
+            "type": "string"
+          },
+          "time": {
+            "type": "number"
+          },
+          "point": {
+            "type": "number"
+          },
+          "problems": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "problemIndex": {
+                  "type": "string"
+                },
+                "accepted": {
+                  "type": "boolean"
+                },
+                "penalty": {
+                  "type": "number"
+                },
+                "time": {
+                  "type": "number"
+                },
+                "timePenalty": {
+                  "type": "number"
+                },
+                "point": {
+                  "type": "number"
                 }
               }
             }
