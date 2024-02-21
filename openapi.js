@@ -953,6 +953,90 @@ const spec={
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "virtual_contests"
+        ],
+        "summary": "バーチャルコンテストを編集",
+        "description": "バーチャルコンテストを編集する",
+        "parameters": [
+          {
+            "name": "virtualContestID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 123
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "startAt": {
+                    "type": "number"
+                  },
+                  "durationSecond": {
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "visible": {
+                    "type": "string"
+                  },
+                  "serverID": {
+                    "type": "string"
+                  },
+                  "members": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "problems": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "startAt": 100,
+                "durationSecond": 6000,
+                "title": "Virtual Contest",
+                "visible": "discordOnly (All)",
+                "serverID": "100000000000000000",
+                "members": [
+                  "atcoderUser1",
+                  "atcoderUser2"
+                ],
+                "problems": [
+                  "Gray",
+                  "Gray",
+                  "Blue"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "バーチャルコンテスト",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VirtualContest"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/virtual_contests/standings/{virtualContestID}": {
